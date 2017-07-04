@@ -1,10 +1,12 @@
 package com.companyproject.fujitsu.editor;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +37,7 @@ public class SaveImage extends AppCompatActivity implements View.OnClickListener
     ImageView mdownloadimg;
     Button mdownloadbtn, muploadnewsbtn;
     Bitmap bitmap;
+    ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +79,22 @@ public class SaveImage extends AppCompatActivity implements View.OnClickListener
 
             case R.id.download_btn:
 
-                try {
-                    String Filename = String.valueOf(System.currentTimeMillis())+".png";
-                    saveImage(bitmap,Filename);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                Toast.makeText(this,"Image Saved In Folder Editor...",Toast.LENGTH_SHORT).show();
-                break;
+//                try {
+//                    String Filename = String.valueOf(System.currentTimeMillis())+".png";
+//                    saveImage(bitmap,Filename);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                Toast.makeText(this,"Image Saved In Folder Editor...",Toast.LENGTH_SHORT).show();
+//                break;
+
+                pDialog = new ProgressDialog(SaveImage.this);
+                pDialog.setMessage("Please Wait ...");
+                pDialog.setIndeterminate(false);
+                pDialog.setCancelable(true);
+                pDialog.show();
+                saveimg();
+
 
             case R.id.upload_btn:
 //                Intent newsestinnt = new Intent(SaveImage.this,UploadWithImg.class);
@@ -115,6 +126,27 @@ public class SaveImage extends AppCompatActivity implements View.OnClickListener
                 image.compress(Bitmap.CompressFormat.PNG, 100, fo);
             }
         }
+    }
+//    class getadsdetail extends AsyncTask<String, Void, String> {
+//        @Override
+//        protected String doInBackground(String... params) {
+//
+//        }
+
+
+    public void saveimg(){
+
+        String  ImagePath = MediaStore.Images.Media.insertImage(
+                getContentResolver(),
+                bitmap,
+                "demo_image",
+                "demo_image"
+        );
+
+        Uri  URI = Uri.parse(ImagePath);
+        pDialog.dismiss();
+        Toast.makeText(SaveImage.this, "Image Saved Successfully", Toast.LENGTH_LONG).show();
+
     }
 
 }
