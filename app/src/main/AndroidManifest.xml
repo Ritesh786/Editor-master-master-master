@@ -69,7 +69,10 @@
         <activity
             android:name=".SaveImage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".UploadWithImg"></activity>
+        <activity android:name=".UploadWithImg"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".CropImage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

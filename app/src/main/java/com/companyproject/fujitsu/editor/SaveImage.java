@@ -97,17 +97,16 @@ public class SaveImage extends AppCompatActivity implements View.OnClickListener
 
 
             case R.id.upload_btn:
-//                Intent newsestinnt = new Intent(SaveImage.this,UploadWithImg.class);
-//                newsestinnt.putExtra("id",nidstr);
-//                newsestinnt.putExtra("type",ntypestr);
-//                newsestinnt.putExtra("headline",nhesdstr);
-//                newsestinnt.putExtra("content",mcontentstr);
-//                newsestinnt.putExtra("caption",mcaptionstr);
-//                startActivity(newsestinnt);
+                Intent newsestinnt = new Intent(SaveImage.this,UploadWithImg.class);
+                newsestinnt.putExtra("id",nidstr);
+                newsestinnt.putExtra("type",ntypestr);
+                newsestinnt.putExtra("headline",nhesdstr);
+                newsestinnt.putExtra("content",mcontentstr);
+                newsestinnt.putExtra("caption",mcaptionstr);
+                startActivity(newsestinnt);
                 break;
 
         }
-
     }
 
     public  void saveImage(Bitmap image,String imagename) throws FileNotFoundException {
@@ -143,7 +142,7 @@ public class SaveImage extends AppCompatActivity implements View.OnClickListener
                 "demo_image"
         );
 
-        Uri  URI = Uri.parse(ImagePath);
+       // Uri  URI = Uri.parse(ImagePath);
         pDialog.dismiss();
         Toast.makeText(SaveImage.this, "Image Saved Successfully", Toast.LENGTH_LONG).show();
 
